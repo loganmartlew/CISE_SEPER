@@ -1,14 +1,21 @@
 const express = require('express');
 const cors = require('cors');
 const { json } = require('body-parser');
+const path = require('path');
 
 const app = express();
 
 app.use(cors());
 app.use(json());
 
-app.get('/', (req, res) => {
+app.use(express.static(path.resolve(__dirname, './public')));
+
+app.get('/api', (req, res) => {
   res.send('Hello from API');
+});
+
+app.get('/*', (req, res) => {
+  response.sendFile(path.resolve(__dirname, './public', 'index.html'));
 });
 
 const PORT = process.env.port || 5000;
