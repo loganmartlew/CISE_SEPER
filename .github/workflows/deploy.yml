@@ -11,6 +11,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Install required dependencies
+        run: npm ci
+
       - name: Build React app
         run: npm run build
 
