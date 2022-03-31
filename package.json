@@ -4,10 +4,11 @@
   "description": "",
   "main": "api/src/index.js",
   "scripts": {
-    "build": "vite build",
+    "build": "vite build --mode production --emptyOutDir",
     "dev:client": "vite dev",
     "dev:api": "nodemon api/index.js",
-    "dev": "concurrently \"npm run dev:client\" \"npm run dev:api\""
+    "dev": "concurrently \"npm run dev:client\" \"npm run dev:api\"",
+    "start": "node api/index.js"
   },
   "author": "",
   "license": "ISC",
