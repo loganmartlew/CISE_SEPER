@@ -7,5 +7,10 @@ export default defineConfig({
   build: {
     outDir: '../api/public',
   },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './setupTests.js',
+  },
   plugins: [react()],
 });
