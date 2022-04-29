@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { render, getByText } from '../test-utils';
+import { render, screen, getByText } from '../test-utils';
 import App from './App';
 
 describe('test App component', () => {
@@ -7,7 +7,7 @@ describe('test App component', () => {
     render(<App />);
 
     const message = 'Hello from client';
-    const messageEl = getByText(message);
+    const messageEl = screen.getByText(message);
 
     expect(messageEl).not.toBe(undefined);
   });

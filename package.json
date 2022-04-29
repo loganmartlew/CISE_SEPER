@@ -8,8 +8,8 @@
     "dev:client": "vite dev",
     "dev:api": "nodemon api/index.js",
     "dev": "concurrently \"npm run dev:client\" \"npm run dev:api\"",
-    "test:client": "vitest client",
-    "test:api": "vitest api",
+    "test:client": "vitest run client",
+    "test:api": "jest api",
     "test": "npm run test:client && npm run test:api",
     "start": "node api/index.js"
   },
@@ -29,9 +29,11 @@
     "@testing-library/user-event": "^14.1.1",
     "@vitejs/plugin-react": "^1.0.7",
     "concurrently": "^7.0.0",
+    "jest": "^28.0.3",
     "jsdom": "^19.0.0",
     "nodemon": "^2.0.15",
     "vite": "^2.9.0",
-    "vitest": "^0.10.0"
+    "vitest": "^0.10.0",
+    "whatwg-fetch": "^3.6.2"
   }
 }
