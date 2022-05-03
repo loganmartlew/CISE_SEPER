@@ -3,8 +3,21 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const { json } = require('body-parser');
 const path = require('path');
+const { connect } = require('mongoose');
 
 dotenv.config();
+
+async function connectDB() {
+  try {
+    connect(process.env.MONGO_URI);
+    console.log('Connected to database');
+  } catch (error) {
+    console.log(error);
+    throw new Error('Unable to connect to database');
+  }
+}
+
+connectDB();
 
 const app = express();
 
