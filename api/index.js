@@ -1,7 +1,10 @@
 const express = require('express');
+const dotenv = require('dotenv');
 const cors = require('cors');
 const { json } = require('body-parser');
 const path = require('path');
+
+dotenv.config();
 
 const app = express();
 
