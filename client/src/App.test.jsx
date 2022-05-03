@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { render, screen, getByText } from '../test-utils';
+import { render, screen } from '../test-utils';
 import App from './App';
 
 describe('test App component', () => {
