@@ -14,6 +14,12 @@ jobs:
       - name: Install required dependencies
         run: npm ci
 
+      - name: Lint Client App
+        run: npm run lint:client
+
+      - name: Lint Backend App
+        run: npm run lint:api
+
       - name: Test Client App
         run: npm run test:client
 

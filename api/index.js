@@ -10,12 +10,12 @@ app.use(json());
 
 app.use(express.static(path.resolve(__dirname, './public')));
 
-app.get('/api', (req, res) => {
+app.get('/api', (_, res) => {
   res.send('Hello from API');
 });
 
-app.get('/*', (req, res) => {
-  response.sendFile(path.resolve(__dirname, './public', 'index.html'));
+app.get('/*', (_, res) => {
+  res.sendFile(path.resolve(__dirname, './public', 'index.html'));
 });
 
 const PORT = process.env.PORT || 5000;
