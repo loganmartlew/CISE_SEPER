@@ -5,7 +5,7 @@ const useApi = () => {
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}`)
-      .then(res => res.text())
+      .then((res) => res.text())
       .then(setMessage);
   }, []);
 

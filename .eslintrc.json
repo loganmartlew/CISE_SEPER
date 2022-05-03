@@ -13,6 +13,11 @@
     "sourceType": "module"
   },
   "plugins": ["react"],
+  "overrides": [
+    {
+      "files": ["*.js", "*.jsx", "*.test.js", "*.test,jsx"]
+    }
+  ],
   "rules": {
     "import/no-extraneous-dependencies": [
       "error",
@@ -40,6 +45,7 @@
       }
     ],
     "arrow-body-style": "off",
-    "react/jsx-no-bind": "off"
+    "react/jsx-no-bind": "off",
+    "react/react-in-jsx-scope": "off"
   }
 }
