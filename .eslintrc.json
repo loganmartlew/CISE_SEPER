@@ -47,6 +47,7 @@
     "arrow-body-style": "off",
     "react/jsx-no-bind": "off",
     "react/react-in-jsx-scope": "off",
-    "object-curly-newline": "off"
+    "object-curly-newline": "off",
+    "jsx-quotes": ["warn", "prefer-single"]
   }
 }
