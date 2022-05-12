@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const { json } = require('body-parser');
 const connectDB = require('./db');
+const api = require('./api');
 
 const envLoader = async () => {
   dotenv.config();
@@ -20,7 +21,9 @@ const mongooseLoader = async () => {
   connectDB();
 };
 
-const apiLoader = async () => {};
+const apiLoader = async (app) => {
+  app.use('/api', api());
+};
 
 const reactLoader = async (app) => {
   app.get('/*', (_, res) => {
@@ -32,7 +35,7 @@ const loadApp = async (app) => {
   await envLoader();
   await expressLoader(app);
   await mongooseLoader();
-  await apiLoader();
+  await apiLoader(app);
   await reactLoader(app);
 };
 
