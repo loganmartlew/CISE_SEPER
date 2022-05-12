@@ -1,4 +1,5 @@
 import { Typography } from '@mui/material';
+import Card from '../components/Card';
 
 const SubmitArticlePage = () => {
   return (
@@ -6,7 +7,9 @@ const SubmitArticlePage = () => {
       <Typography variant='h3' component='h2'>
         Submit An Article
       </Typography>
-      <form></form>
+      <Card>
+        <Typography>A Card</Typography>
+      </Card>
     </>
   );
 };
