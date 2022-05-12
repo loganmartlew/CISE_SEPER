@@ -21,5 +21,17 @@ module.exports = () => {
     return res.status(201).json({ article: newArticle });
   });
 
+  app.get('/:id', async (req, res) => {
+    const { id } = req.params;
+
+    const article = await ArticleService.getSingleArticle(id);
+
+    if (!article) {
+      return res.status(422).json({ message: 'Article not found' });
+    }
+
+    return res.status(200).json({ article });
+  });
+
   return app;
 };
