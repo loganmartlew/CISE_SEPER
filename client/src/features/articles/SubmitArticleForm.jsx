@@ -1,3 +1,4 @@
+import { useForm } from 'react-hook-form';
 import { Stack, styled } from '@mui/material';
 import Button from '../../components/Button';
 import TextInput from '../../components/TextInput';
@@ -5,21 +6,73 @@ import TextInput from '../../components/TextInput';
 const Form = styled('form')({});
 
 const SubmitArticleForm = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const submit = (data) => {
+    // eslint-disable-next-line no-param-reassign
+    data.sePractice = {
+      name: 'TDD',
+    };
+
+    fetch(`${import.meta.env.VITE_API_URL}/articles`, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ articleData: data }),
+    })
+      .then((res) => res.json())
+      .then(console.log);
+  };
+
   return (
-    <Form autoComplete='off'>
+    <Form autoComplete='off' onSubmit={handleSubmit(submit)}>
       <Stack spacing='1.5em'>
-        <TextInput name='title' label='Title' placeholder='Article Title' />
         <TextInput
-          name='authors'
+          label='Title'
+          placeholder='Article Title'
+          required
+          error={errors?.title}
+          helperText={errors?.title?.message}
+          {...register('title', {
+            required: { value: true, message: 'Title is required' },
+          })}
+        />
+        <TextInput
           label='Authors'
           placeholder='Article Authors'
+          {...register('authors', {
+            required: { value: true, message: 'Authors is required' },
+          })}
+          required
+          error={errors?.authors}
+          helperText={errors?.authors?.message}
         />
         <TextInput
           name='year'
           label='Year'
           placeholder='Article Publication Year'
+          {...register('year', {
+            required: { value: true, message: 'Year is required' },
+          })}
+          required
+          error={errors?.year}
+          helperText={errors?.year?.message}
         />
-        <TextInput name='doi' label='DOI' placeholder='Article DOI' />
+        <TextInput
+          label='DOI'
+          placeholder='Article DOI'
+          {...register('doi', {
+            required: { value: true, message: 'DOI is required' },
+          })}
+          required
+          error={errors?.doi}
+          helperText={errors?.doi?.message}
+        />
         <Button type='submit' variant='contained' sx={{ width: 'max-content' }}>
           Submit Article
         </Button>

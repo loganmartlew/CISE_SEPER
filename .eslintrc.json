@@ -50,6 +50,8 @@
     "object-curly-newline": "off",
     "jsx-quotes": ["warn", "prefer-single"],
     "react/prop-types": "off",
-    "no-underscore-dangle": "off"
+    "no-underscore-dangle": "off",
+    "react/jsx-props-no-spreading": "off",
+    "comma-dangle": "off"
   }
 }
