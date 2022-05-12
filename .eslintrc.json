@@ -48,6 +48,7 @@
     "react/jsx-no-bind": "off",
     "react/react-in-jsx-scope": "off",
     "object-curly-newline": "off",
-    "jsx-quotes": ["warn", "prefer-single"]
+    "jsx-quotes": ["warn", "prefer-single"],
+    "react/prop-types": "off"
   }
 }

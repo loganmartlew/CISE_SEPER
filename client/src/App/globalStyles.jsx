@@ -1,5 +1,7 @@
+import theme from './theme';
+
 export default {
   body: {
-    backgroundColor: 'hsla(0, 0%, 94%, 1)',
+    backgroundColor: theme.palette.mono.light,
   },
 };
