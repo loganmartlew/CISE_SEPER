@@ -20,19 +20,23 @@ class ArticleService {
   static async searchArticles(q) {}
 
   static async createArticle(articleData) {
-    // Validate new article
+    try {
+      // Validate new article
 
-    const { title, authors, year, doi, sePractice } = articleData;
+      const { title, authors, year, doi, sePractice } = articleData;
 
-    const newArticle = new Article();
-    newArticle.title = title;
-    newArticle.authors = authors;
-    newArticle.year = year;
-    newArticle.doi = doi;
-    newArticle.sePractice = sePractice;
-    newArticle.save();
+      const newArticle = new Article();
+      newArticle.title = title;
+      newArticle.authors = authors;
+      newArticle.year = year;
+      newArticle.doi = doi;
+      newArticle.sePractice = sePractice;
+      newArticle.save();
 
-    return newArticle;
+      return newArticle;
+    } catch (error) {
+      return null;
+    }
   }
 
   static async updateArticle(newArticle) {}
