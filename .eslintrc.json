@@ -49,6 +49,7 @@
     "react/react-in-jsx-scope": "off",
     "object-curly-newline": "off",
     "jsx-quotes": ["warn", "prefer-single"],
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "no-underscore-dangle": "off"
   }
 }
