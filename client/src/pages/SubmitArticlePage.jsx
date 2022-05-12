@@ -1,9 +1,6 @@
-import { Box, Typography, Stack, styled } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import Card from '../components/Card';
-import Button from '../components/Button';
-import TextInput from '../components/TextInput';
-
-const Form = styled('form')({});
+import SubmitArticleForm from '../features/articles/SubmitArticleForm';
 
 const SubmitArticlePage = () => {
   return (
@@ -21,29 +18,7 @@ const SubmitArticlePage = () => {
         Submit An Article
       </Typography>
       <Card>
-        <Form autoComplete='off'>
-          <Stack spacing='1.5em'>
-            <TextInput name='title' label='Title' placeholder='Article Title' />
-            <TextInput
-              name='authors'
-              label='Authors'
-              placeholder='Article Authors'
-            />
-            <TextInput
-              name='year'
-              label='Year'
-              placeholder='Article Publication Year'
-            />
-            <TextInput name='doi' label='DOI' placeholder='Article DOI' />
-            <Button
-              type='submit'
-              variant='contained'
-              sx={{ width: 'max-content' }}
-            >
-              Submit Article
-            </Button>
-          </Stack>
-        </Form>
+        <SubmitArticleForm />
       </Card>
     </Box>
   );
