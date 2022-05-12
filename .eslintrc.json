@@ -46,6 +46,7 @@
     ],
     "arrow-body-style": "off",
     "react/jsx-no-bind": "off",
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "object-curly-newline": "off"
   }
 }
