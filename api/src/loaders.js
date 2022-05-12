@@ -27,7 +27,8 @@ const apiLoader = async (app) => {
 
 const reactLoader = async (app) => {
   app.get('/*', (_, res) => {
-    res.sendFile(path.resolve(__dirname, './public', 'index.html'));
+    console.log('serving react from api');
+    res.sendFile(path.resolve(__dirname, '../public', 'index.html'));
   });
 };
 
