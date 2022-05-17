@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Layout from './Layout';
+import AppShell from '../features/layout/AppShell';
 import SubmitArticlePage from '../pages/SubmitArticlePage';
 import SearchArticles from '../pages/SearchArticles';
 
@@ -7,7 +7,7 @@ const AppRoutes = () => {
   return (
     <Router>
       <Routes>
-        <Route element={<Layout />}>
+        <Route element={<AppShell />}>
           <Route path='/' element={<h1>Home</h1>} />
           <Route path='/search' element={<SearchArticles />} />
           <Route path='/submit' element={<SubmitArticlePage />} />

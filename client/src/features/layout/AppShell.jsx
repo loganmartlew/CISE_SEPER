@@ -1,10 +1,11 @@
 import { Outlet } from 'react-router-dom';
 import { Container } from '@mui/material';
+import Header from './Header';
 
-const Layout = () => {
+const AppShell = () => {
   return (
     <>
-      {/* Header */}
+      <Header />
       <Container component='main'>
         <Outlet />
       </Container>
@@ -12,4 +13,4 @@ const Layout = () => {
   );
 };
 
-export default Layout;
+export default AppShell;
