@@ -14,7 +14,7 @@ const expressLoader = async (app) => {
   app.use(cors());
   app.use(json());
 
-  app.use(express.static(path.resolve(__dirname, './public')));
+  app.use(express.static(path.resolve(__dirname, '../public')));
 };
 
 const mongooseLoader = async () => {
@@ -27,7 +27,6 @@ const apiLoader = async (app) => {
 
 const reactLoader = async (app) => {
   app.get('/*', (_, res) => {
-    console.log('serving react from api');
     res.sendFile(path.resolve(__dirname, '../public', 'index.html'));
   });
 };
