@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { Stack, styled } from '@mui/material';
 import Button from '../../components/Button';
@@ -11,6 +12,8 @@ const SubmitArticleForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const navigate = useNavigate();
 
   const submit = (data) => {
     // eslint-disable-next-line no-param-reassign
@@ -26,7 +29,9 @@ const SubmitArticleForm = () => {
       body: JSON.stringify({ articleData: data }),
     })
       .then((res) => res.json())
-      .then(console.log);
+      .then(() => {
+        navigate('/search');
+      });
   };
 
   return (
