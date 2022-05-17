@@ -21,11 +21,11 @@ const ArticlesTable = ({ data = useMemo(() => [], []) }) => {
     () => [
       {
         Header: 'Article Name',
-        accessor: 'name',
+        accessor: 'title',
       },
       {
         Header: 'SE Practice',
-        accessor: 'practice',
+        accessor: 'sePractice',
       },
       {
         Header: 'Authors',
