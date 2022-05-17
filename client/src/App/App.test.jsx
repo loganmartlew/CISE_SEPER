@@ -6,7 +6,7 @@ describe('test App component', () => {
   test('component displays message', () => {
     render(<App />);
 
-    const message = 'Hello from client';
+    const message = 'SPEED';
     const messageEl = screen.getByText(message);
 
     expect(messageEl).not.toBe(undefined);

@@ -17,7 +17,7 @@ class ArticleService {
     }
   }
 
-  static async searchArticles(q) {}
+  // static async searchArticles(q) {}
 
   static async createArticle(articleData) {
     try {
@@ -39,9 +39,9 @@ class ArticleService {
     }
   }
 
-  static async updateArticle(newArticle) {}
+  // static async updateArticle(newArticle) {}
 
-  static async deleteArticle(id) {}
+  // static async deleteArticle(id) {}
 }
 
 module.exports = ArticleService;
