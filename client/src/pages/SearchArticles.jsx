@@ -1,4 +1,6 @@
+import { Stack } from '@mui/material';
 import { useState, useEffect, useMemo } from 'react';
+import PageTitle from '../components/PageTitle';
 import ArticlesTable from '../features/articles/ArticlesTable';
 
 const SearchArticles = () => {
@@ -26,10 +28,10 @@ const SearchArticles = () => {
   }, []);
 
   return (
-    <>
-      <h1>Articles</h1>
+    <Stack spacing={3}>
+      <PageTitle>Search For An Article</PageTitle>
       <ArticlesTable data={tableData} />
-    </>
+    </Stack>
   );
 };
 

@@ -6,7 +6,7 @@ const AppShell = () => {
   return (
     <>
       <Header />
-      <Container component='main'>
+      <Container component='main' sx={{ pt: 3 }}>
         <Outlet />
       </Container>
     </>
