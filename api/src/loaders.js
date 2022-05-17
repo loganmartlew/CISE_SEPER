@@ -13,7 +13,7 @@ const expressLoader = async (app) => {
   app.use(cors());
   app.use(json());
 
-  app.use(express.static(path.resolve(__dirname, './public')));
+  app.use(express.static(path.resolve(__dirname, '../public')));
 };
 
 const mongooseLoader = async () => {
@@ -24,7 +24,7 @@ const apiLoader = async () => {};
 
 const reactLoader = async (app) => {
   app.get('/*', (_, res) => {
-    res.sendFile(path.resolve(__dirname, './public', 'index.html'));
+    res.sendFile(path.resolve(__dirname, '../public', 'index.html'));
   });
 };
 
