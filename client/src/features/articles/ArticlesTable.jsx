@@ -14,7 +14,6 @@ import {
   ExpandMore as ChevronDown,
   ExpandLess as ChevronUp,
 } from '@mui/icons-material';
-import Card from '../../components/Card';
 
 const ArticlesTable = ({ data = useMemo(() => [], []) }) => {
   const columns = useMemo(
@@ -47,58 +46,56 @@ const ArticlesTable = ({ data = useMemo(() => [], []) }) => {
     useTable({ columns, data }, useSortBy);
 
   return (
-    <Card>
-      <TableContainer>
-        <Table {...getTableProps()}>
-          <TableHead>
-            {headerGroups.map((headerGroup) => (
-              <TableRow {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => (
-                  <TableCell
-                    {...column.getHeaderProps(column.getSortByToggleProps())}
+    <TableContainer>
+      <Table {...getTableProps()}>
+        <TableHead>
+          {headerGroups.map((headerGroup) => (
+            <TableRow {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map((column) => (
+                <TableCell
+                  {...column.getHeaderProps(column.getSortByToggleProps())}
+                >
+                  <Box
+                    component='span'
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                    }}
                   >
-                    <Box
-                      component='span'
-                      sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                      }}
-                    >
-                      {column.render('Header')}
-                      {column.isSorted ? (
-                        column.isSortedDesc ? (
-                          <ChevronUp />
-                        ) : (
-                          <ChevronDown />
-                        )
+                    {column.render('Header')}
+                    {column.isSorted ? (
+                      column.isSortedDesc ? (
+                        <ChevronUp />
                       ) : (
-                        <ChevronDown sx={{ opacity: 0 }} />
-                      )}
-                    </Box>
-                  </TableCell>
-                ))}
+                        <ChevronDown />
+                      )
+                    ) : (
+                      <ChevronDown sx={{ opacity: 0 }} />
+                    )}
+                  </Box>
+                </TableCell>
+              ))}
+            </TableRow>
+          ))}
+        </TableHead>
+        <TableBody {...getTableBodyProps()}>
+          {rows.map((row) => {
+            prepareRow(row);
+            return (
+              <TableRow {...row.getRowProps()}>
+                {row.cells.map((cell) => {
+                  return (
+                    <TableCell {...cell.getCellProps()}>
+                      {cell.render('Cell')}
+                    </TableCell>
+                  );
+                })}
               </TableRow>
-            ))}
-          </TableHead>
-          <TableBody {...getTableBodyProps()}>
-            {rows.map((row) => {
-              prepareRow(row);
-              return (
-                <TableRow {...row.getRowProps()}>
-                  {row.cells.map((cell) => {
-                    return (
-                      <TableCell {...cell.getCellProps()}>
-                        {cell.render('Cell')}
-                      </TableCell>
-                    );
-                  })}
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Card>
+            );
+          })}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 };
 

@@ -1,10 +1,12 @@
-import { Stack } from '@mui/material';
-import { useState, useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
+import { Stack, Typography } from '@mui/material';
+import Card from '../components/Card';
 import PageTitle from '../components/PageTitle';
 import ArticlesTable from '../features/articles/ArticlesTable';
+import useSearchArticles from '../features/articles/useSearchArticles';
 
 const SearchArticles = () => {
-  const [articles, setArticles] = useState([]);
+  const { articles, loading, error } = useSearchArticles('');
 
   const tableData = useMemo(
     () =>
@@ -21,16 +23,22 @@ const SearchArticles = () => {
 
   console.log(tableData);
 
-  useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/articles`)
-      .then((res) => res.json())
-      .then((data) => setArticles(data));
-  }, []);
-
   return (
     <Stack spacing={3}>
       <PageTitle>Search For An Article</PageTitle>
-      <ArticlesTable data={tableData} />
+      <Card>
+        {(() => {
+          if (error) {
+            return <Typography>{error}</Typography>;
+          }
+
+          if (loading) {
+            return <Typography>Loading...</Typography>;
+          }
+
+          return <ArticlesTable data={tableData} />;
+        })()}
+      </Card>
     </Stack>
   );
 };
