@@ -4,12 +4,11 @@ import { useTable, useSortBy } from 'react-table';
 import {
   TableContainer,
   Table,
-  TableHead,
   TableBody,
   TableRow,
   TableCell,
 } from '@mui/material';
-import HeadRow from './HeadRow';
+import Head from './Head';
 
 const ArticlesTable = ({ data = useMemo(() => [], []) }) => {
   const columns = useMemo(
@@ -44,14 +43,7 @@ const ArticlesTable = ({ data = useMemo(() => [], []) }) => {
   return (
     <TableContainer>
       <Table {...getTableProps()}>
-        <TableHead>
-          {headerGroups.map((headerGroup) => (
-            <HeadRow
-              headerGroup={headerGroup}
-              rowProps={headerGroup.getHeaderGroupProps()}
-            />
-          ))}
-        </TableHead>
+        <Head headerGroups={headerGroups} />
         <TableBody {...getTableBodyProps()}>
           {rows.map((row) => {
             prepareRow(row);
