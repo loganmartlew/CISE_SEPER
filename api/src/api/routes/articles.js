@@ -9,6 +9,16 @@ module.exports = () => {
     return res.status(200).json(articles);
   });
 
+  app.get('/moderation', async (_, res) => {
+    const articles = await ArticleService.getModeratorQueue();
+    return res.status(200).json(articles);
+  });
+
+  app.get('/analysis', async (_, res) => {
+    const articles = await ArticleService.getAnalysisQueue();
+    return res.status(200).json(articles);
+  });
+
   app.post('/', async (req, res) => {
     const { articleData } = req.body;
 
