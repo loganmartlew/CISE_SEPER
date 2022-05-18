@@ -25,7 +25,7 @@ const articleSchema = new mongoose.Schema({
   },
   reviewStage: {
     type: String,
-    required: true,
+    enum: [...Object.values(ArticleStage)],
     default: ArticleStage.MODERATE,
   },
 });
