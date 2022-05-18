@@ -7,6 +7,7 @@ const HeadRow = ({ headerGroup, rowProps }) => {
     <TableRow {...rowProps}>
       {headerGroup.headers.map((column) => (
         <HeadCell
+          key={column.id}
           column={column}
           isSorted={column.isSorted}
           isSortedDesc={column.isSortedDesc}

@@ -6,6 +6,7 @@ const Head = ({ headerGroups }) => {
     <TableHead>
       {headerGroups.map((headerGroup) => (
         <HeadRow
+          key={headerGroup.getHeaderGroupProps().key}
           headerGroup={headerGroup}
           rowProps={headerGroup.getHeaderGroupProps()}
         />
