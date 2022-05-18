@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useReducer, useEffect } from 'react';
 import {
   Box,
   Stack,
@@ -7,17 +7,28 @@ import {
   AccordionDetails,
   Typography,
   FormControl,
-  FormLabel,
   Select,
   MenuItem,
   FormGroup,
+  FormControlLabel,
+  Checkbox,
 } from '@mui/material';
 import { ExpandMore } from '@mui/icons-material';
 import usePractices from './usePractices';
+import {
+  defaultState,
+  reducer,
+  toggleColumn,
+  setPractice,
+} from './filtersReducer';
 
-const ArticlesFilters = () => {
-  const [value, setValue] = useState('');
+const ArticlesFilters = ({ columns }) => {
+  const [filters, dispatchFilters] = useReducer(reducer, defaultState);
   const { practices } = usePractices();
+
+  useEffect(() => {
+    console.log(filters);
+  }, [filters]);
 
   return (
     <Accordion
@@ -29,24 +40,45 @@ const ArticlesFilters = () => {
         </Typography>
       </AccordionSummary>
       <AccordionDetails sx={{ padding: 0 }}>
-        <Stack>
+        <Stack spacing={4}>
           <Box>
             <FormControl variant='outlined'>
-              <FormLabel>SE Practice</FormLabel>
+              <Typography variant='h6'>SE Practice</Typography>
               <Select
-                value={value}
-                onChange={(e) => setValue(e.target.value)}
+                value={filters.practice}
+                onChange={(e) => dispatchFilters(setPractice(e.target.value))}
                 sx={{ minWidth: '300px' }}
               >
                 <MenuItem value=''>None</MenuItem>
                 {practices.map((practice) => (
-                  <MenuItem value={practice.name}>{practice.name}</MenuItem>
+                  <MenuItem value={practice.name} key={practice.name}>
+                    {practice.name}
+                  </MenuItem>
                 ))}
               </Select>
             </FormControl>
           </Box>
           <Box>
-            <FormGroup></FormGroup>
+            <FormGroup>
+              <Typography variant='h6'>Shown Columns</Typography>
+              {columns.map((column) => (
+                <FormControlLabel
+                  key={column.accessor}
+                  label={column.Header}
+                  control={
+                    <Checkbox
+                      checked={filters.columns[column.accessor]}
+                      onChange={
+                        () =>
+                          // eslint-disable-next-line implicit-arrow-linebreak
+                          dispatchFilters(toggleColumn(column.accessor))
+                        // eslint-disable-next-line react/jsx-curly-newline
+                      }
+                    />
+                  }
+                />
+              ))}
+            </FormGroup>
           </Box>
         </Stack>
       </AccordionDetails>

@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTable, useSortBy, useFilters } from 'react-table';
 import { Stack, Typography } from '@mui/material';
+import tableColumns from '../features/articles/ArticlesFilters/columns';
 import Card from '../components/Card';
 import PageTitle from '../components/PageTitle';
 import ArticlesTable from '../features/articles/ArticlesTable';
@@ -16,31 +17,7 @@ const SearchArticles = () => {
 
   const navigate = useNavigate();
 
-  const columns = useMemo(
-    () => [
-      {
-        Header: 'Article Name',
-        accessor: 'title',
-      },
-      {
-        Header: 'SE Practice',
-        accessor: 'sePractice',
-      },
-      {
-        Header: 'Authors',
-        accessor: 'authors',
-      },
-      {
-        Header: 'Year',
-        accessor: 'year',
-      },
-      {
-        Header: 'DOI',
-        accessor: 'doi',
-      },
-    ],
-    []
-  );
+  const columns = useMemo(() => tableColumns, []);
 
   const data = useMemo(
     () =>
@@ -71,7 +48,7 @@ const SearchArticles = () => {
         onSubmit={submit}
       />
       <Card>
-        <ArticlesFilters />
+        <ArticlesFilters columns={columns} />
       </Card>
       <Card>
         {(() => {

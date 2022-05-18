@@ -53,6 +53,7 @@
     "no-underscore-dangle": "off",
     "react/jsx-props-no-spreading": "off",
     "comma-dangle": "off",
-    "operator-linebreak": "off"
+    "operator-linebreak": "off",
+    "react/jsx-wrap-multilines": "off"
   }
 }
