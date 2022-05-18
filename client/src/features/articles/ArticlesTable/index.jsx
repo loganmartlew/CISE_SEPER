@@ -1,9 +1,9 @@
 /* eslint-disable no-nested-ternary */
 import { useMemo } from 'react';
 import { useTable, useSortBy } from 'react-table';
-import { TableContainer, Table, TableBody } from '@mui/material';
+import { TableContainer, Table } from '@mui/material';
 import Head from './Head';
-import Row from './Row';
+import Body from './Body';
 
 const ArticlesTable = ({ data = useMemo(() => [], []) }) => {
   const columns = useMemo(
@@ -39,18 +39,11 @@ const ArticlesTable = ({ data = useMemo(() => [], []) }) => {
     <TableContainer>
       <Table {...getTableProps()}>
         <Head headerGroups={headerGroups} />
-        <TableBody {...getTableBodyProps()}>
-          {rows.map((row) => {
-            prepareRow(row);
-            return (
-              <Row
-                key={row.getRowProps().key}
-                rowProps={row.getRowProps()}
-                rowCells={row.cells}
-              />
-            );
-          })}
-        </TableBody>
+        <Body
+          role={getTableBodyProps().role}
+          rows={rows}
+          prepareRow={prepareRow}
+        />
       </Table>
     </TableContainer>
   );

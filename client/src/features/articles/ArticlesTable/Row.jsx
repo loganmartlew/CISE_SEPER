@@ -2,9 +2,9 @@ import { memo } from 'react';
 import { TableRow } from '@mui/material';
 import Cell from './Cell';
 
-const Row = ({ rowProps, rowCells }) => {
+const Row = ({ role, rowCells }) => {
   return (
-    <TableRow {...rowProps}>
+    <TableRow role={role}>
       {rowCells.map((cell) => (
         <Cell
           key={cell.getCellProps().key}
