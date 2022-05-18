@@ -1,4 +1,5 @@
-import { useMemo } from 'react';
+import { useState, useMemo } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Stack, Typography } from '@mui/material';
 import Card from '../components/Card';
 import PageTitle from '../components/PageTitle';
@@ -7,7 +8,11 @@ import useSearchArticles from '../features/articles/useSearchArticles';
 import SearchBar from '../components/SearchBar';
 
 const SearchArticles = () => {
-  const { articles, loading, error } = useSearchArticles('');
+  const { q } = useParams();
+  const [search, setSearch] = useState(q);
+  const { articles, loading, error } = useSearchArticles(search);
+
+  const navigate = useNavigate();
 
   const tableData = useMemo(
     () =>
@@ -22,12 +27,19 @@ const SearchArticles = () => {
     [articles]
   );
 
-  console.log(tableData);
+  const submit = (e) => {
+    e.preventDefault();
+    navigate(`/search?q=${search}`);
+  };
 
   return (
     <Stack spacing={3}>
       <PageTitle>Search For An Article</PageTitle>
-      <SearchBar />
+      <SearchBar
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        onSubmit={submit}
+      />
       <Card>
         {(() => {
           if (error) {

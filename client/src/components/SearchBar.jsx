@@ -27,9 +27,9 @@ const SearchButton = styled(ButtonBase)(({ theme }) => ({
   },
 }));
 
-const SearchBar = ({ value, onChange }) => {
+const SearchBar = ({ value, onChange, onSubmit }) => {
   return (
-    <Form>
+    <Form onSubmit={onSubmit}>
       <Input
         value={value}
         onChange={onChange}
@@ -37,7 +37,7 @@ const SearchBar = ({ value, onChange }) => {
         placeholder='Search...'
         sx={{ gap: '0.7em' }}
       />
-      <SearchButton>
+      <SearchButton type='submit'>
         Search
         <ChevronRight />
       </SearchButton>
