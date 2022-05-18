@@ -1,11 +1,13 @@
 import { useState, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useTable, useSortBy, useFilters } from 'react-table';
 import { Stack, Typography } from '@mui/material';
 import Card from '../components/Card';
 import PageTitle from '../components/PageTitle';
 import ArticlesTable from '../features/articles/ArticlesTable';
 import useSearchArticles from '../features/articles/useSearchArticles';
 import SearchBar from '../components/SearchBar';
+import ArticlesFilters from '../features/articles/ArticlesFilters';
 
 const SearchArticles = () => {
   const { q } = useParams();
@@ -14,7 +16,33 @@ const SearchArticles = () => {
 
   const navigate = useNavigate();
 
-  const tableData = useMemo(
+  const columns = useMemo(
+    () => [
+      {
+        Header: 'Article Name',
+        accessor: 'title',
+      },
+      {
+        Header: 'SE Practice',
+        accessor: 'sePractice',
+      },
+      {
+        Header: 'Authors',
+        accessor: 'authors',
+      },
+      {
+        Header: 'Year',
+        accessor: 'year',
+      },
+      {
+        Header: 'DOI',
+        accessor: 'doi',
+      },
+    ],
+    []
+  );
+
+  const data = useMemo(
     () =>
       // eslint-disable-next-line implicit-arrow-linebreak
       articles.map((article) => ({
@@ -26,6 +54,8 @@ const SearchArticles = () => {
       })),
     [articles]
   );
+
+  const table = useTable({ columns, data }, useFilters, useSortBy);
 
   const submit = (e) => {
     e.preventDefault();
@@ -41,6 +71,9 @@ const SearchArticles = () => {
         onSubmit={submit}
       />
       <Card>
+        <ArticlesFilters />
+      </Card>
+      <Card>
         {(() => {
           if (error) {
             return <Typography>{error}</Typography>;
@@ -50,7 +83,7 @@ const SearchArticles = () => {
             return <Typography>Loading...</Typography>;
           }
 
-          return <ArticlesTable data={tableData} />;
+          return <ArticlesTable {...table} />;
         })()}
       </Card>
     </Stack>
