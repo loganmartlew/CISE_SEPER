@@ -2,7 +2,6 @@
 import { useMemo } from 'react';
 import { useTable, useSortBy } from 'react-table';
 import {
-  Box,
   TableContainer,
   Table,
   TableHead,
@@ -10,10 +9,7 @@ import {
   TableRow,
   TableCell,
 } from '@mui/material';
-import {
-  ExpandMore as ChevronDown,
-  ExpandLess as ChevronUp,
-} from '@mui/icons-material';
+import HeadCell from './HeadCell';
 
 const ArticlesTable = ({ data = useMemo(() => [], []) }) => {
   const columns = useMemo(
@@ -52,28 +48,11 @@ const ArticlesTable = ({ data = useMemo(() => [], []) }) => {
           {headerGroups.map((headerGroup) => (
             <TableRow {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
-                <TableCell
-                  {...column.getHeaderProps(column.getSortByToggleProps())}
-                >
-                  <Box
-                    component='span'
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                    }}
-                  >
-                    {column.render('Header')}
-                    {column.isSorted ? (
-                      column.isSortedDesc ? (
-                        <ChevronUp />
-                      ) : (
-                        <ChevronDown />
-                      )
-                    ) : (
-                      <ChevronDown sx={{ opacity: 0 }} />
-                    )}
-                  </Box>
-                </TableCell>
+                <HeadCell
+                  column={column}
+                  isSorted={column.isSorted}
+                  isSortedDesc={column.isSortedDesc}
+                />
               ))}
             </TableRow>
           ))}
