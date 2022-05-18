@@ -1,8 +1,36 @@
 const { Article } = require('../models/Article');
+const ArticleStage = require('../../../shared/ArticleStage');
 
 class ArticleService {
   static async getArticles() {
     const articles = await Article.find();
+    return articles;
+  }
+
+  static async getAcceptedArticles() {
+    const articles = await Article.find({
+      $where: {
+        reviewStage: ArticleStage.ACCEPTED,
+      },
+    });
+    return articles;
+  }
+
+  static async getModeratorQueue() {
+    const articles = await Article.find({
+      $where: {
+        reviewStage: ArticleStage.MODERATE,
+      },
+    });
+    return articles;
+  }
+
+  static async getAnalysisQueue() {
+    const articles = await Article.find({
+      $where: {
+        reviewStage: ArticleStage.ANALYSE,
+      },
+    });
     return articles;
   }
 
