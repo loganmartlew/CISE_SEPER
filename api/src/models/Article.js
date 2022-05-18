@@ -2,33 +2,38 @@ const mongoose = require('mongoose');
 const ArticleStage = require('../../../shared/ArticleStage');
 const { practiceSchema } = require('./Practice');
 
-const articleSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
+const articleSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+    },
+    authors: {
+      type: String,
+      required: true,
+    },
+    year: {
+      type: Number,
+      required: true,
+    },
+    doi: {
+      type: String,
+      required: true,
+    },
+    sePractice: {
+      type: practiceSchema,
+      required: true,
+    },
+    reviewStage: {
+      type: String,
+      enum: [...Object.values(ArticleStage)],
+      default: ArticleStage.MODERATE,
+    },
   },
-  authors: {
-    type: String,
-    required: true,
-  },
-  year: {
-    type: Number,
-    required: true,
-  },
-  doi: {
-    type: String,
-    required: true,
-  },
-  sePractice: {
-    type: practiceSchema,
-    required: true,
-  },
-  reviewStage: {
-    type: String,
-    enum: [...Object.values(ArticleStage)],
-    default: ArticleStage.MODERATE,
-  },
-});
+  {
+    timestamps: true,
+  }
+);
 
 const Article = mongoose.model('article', articleSchema);
 
