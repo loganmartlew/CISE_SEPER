@@ -11,12 +11,22 @@ module.exports = () => {
 
   app.get('/moderation', async (_, res) => {
     const articles = await ArticleService.getModeratorQueue();
-    return res.status(200).json(articles);
+
+    const sortedArticles = articles.sort((a, b) => {
+      return new Date(b.updatedAt) - new Date(a.updatedAt);
+    });
+
+    return res.status(200).json(sortedArticles);
   });
 
   app.get('/analysis', async (_, res) => {
     const articles = await ArticleService.getAnalysisQueue();
-    return res.status(200).json(articles);
+
+    const sortedArticles = articles.sort((a, b) => {
+      return new Date(b.updatedAt) - new Date(a.updatedAt);
+    });
+
+    return res.status(200).json(sortedArticles);
   });
 
   app.post('/', async (req, res) => {
