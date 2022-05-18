@@ -22,7 +22,6 @@ const articleSchema = new mongoose.Schema(
     },
     sePractice: {
       type: practiceSchema,
-      required: true,
     },
     reviewStage: {
       type: String,

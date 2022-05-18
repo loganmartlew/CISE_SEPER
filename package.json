@@ -17,7 +17,8 @@
     "test:client": "vitest run client",
     "test:api": "jest api",
     "test": "npm run test:client && npm run test:api",
-    "start": "node api/index.js"
+    "start": "node api/index.js",
+    "seed": "node api/seedDb.js"
   },
   "author": "",
   "license": "ISC",
