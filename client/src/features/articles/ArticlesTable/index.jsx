@@ -1,51 +1,27 @@
-/* eslint-disable no-nested-ternary */
-import { useMemo } from 'react';
-import { useTable, useSortBy } from 'react-table';
-import { TableContainer, Table } from '@mui/material';
+import { TableContainer, Table, Typography } from '@mui/material';
 import Head from './Head';
 import Body from './Body';
 
-const ArticlesTable = ({ data = useMemo(() => [], []) }) => {
-  const columns = useMemo(
-    () => [
-      {
-        Header: 'Article Name',
-        accessor: 'title',
-      },
-      {
-        Header: 'SE Practice',
-        accessor: 'sePractice',
-      },
-      {
-        Header: 'Authors',
-        accessor: 'authors',
-      },
-      {
-        Header: 'Year',
-        accessor: 'year',
-      },
-      {
-        Header: 'DOI',
-        accessor: 'doi',
-      },
-    ],
-    []
-  );
-
+const ArticlesTable = (props) => {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns, data }, useSortBy);
+    props;
 
   return (
-    <TableContainer>
-      <Table {...getTableProps()}>
-        <Head headerGroups={headerGroups} />
-        <Body
-          role={getTableBodyProps().role}
-          rows={rows}
-          prepareRow={prepareRow}
-        />
-      </Table>
-    </TableContainer>
+    <>
+      <Typography variant='h5' fontWeight={600} sx={{ mb: 2 }}>
+        Results
+      </Typography>
+      <TableContainer>
+        <Table {...getTableProps()}>
+          <Head headerGroups={headerGroups} />
+          <Body
+            role={getTableBodyProps().role}
+            rows={rows}
+            prepareRow={prepareRow}
+          />
+        </Table>
+      </TableContainer>
+    </>
   );
 };
 
