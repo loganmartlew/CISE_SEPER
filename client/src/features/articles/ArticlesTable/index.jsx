@@ -9,7 +9,7 @@ import {
   TableRow,
   TableCell,
 } from '@mui/material';
-import HeadCell from './HeadCell';
+import HeadRow from './HeadRow';
 
 const ArticlesTable = ({ data = useMemo(() => [], []) }) => {
   const columns = useMemo(
@@ -46,15 +46,10 @@ const ArticlesTable = ({ data = useMemo(() => [], []) }) => {
       <Table {...getTableProps()}>
         <TableHead>
           {headerGroups.map((headerGroup) => (
-            <TableRow {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <HeadCell
-                  column={column}
-                  isSorted={column.isSorted}
-                  isSortedDesc={column.isSortedDesc}
-                />
-              ))}
-            </TableRow>
+            <HeadRow
+              headerGroup={headerGroup}
+              rowProps={headerGroup.getHeaderGroupProps()}
+            />
           ))}
         </TableHead>
         <TableBody {...getTableBodyProps()}>
