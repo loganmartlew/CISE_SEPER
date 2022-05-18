@@ -1,4 +1,3 @@
-import { useReducer, useEffect } from 'react';
 import {
   Box,
   Stack,
@@ -15,20 +14,10 @@ import {
 } from '@mui/material';
 import { ExpandMore } from '@mui/icons-material';
 import usePractices from './usePractices';
-import {
-  defaultState,
-  reducer,
-  toggleColumn,
-  setPractice,
-} from './filtersReducer';
+import { toggleColumn, setPractice } from './filtersReducer';
 
-const ArticlesFilters = ({ columns }) => {
-  const [filters, dispatchFilters] = useReducer(reducer, defaultState);
+const ArticlesFilters = ({ columns, filters, dispatchFilters }) => {
   const { practices } = usePractices();
-
-  useEffect(() => {
-    console.log(filters);
-  }, [filters]);
 
   return (
     <Accordion
