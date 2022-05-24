@@ -1,11 +1,17 @@
+import QueuePageLayout from '../features/layout/QueuePageLayout';
 import QueueList from '../features/queue/QueueList';
+import useModeratorArticles from '../features/queue/useModeratorArticles';
 
 const ModeratorQueuePage = () => {
+  const { articles, error, loading } = useModeratorArticles();
+
   return (
-    <>
-      <div>Moderator Queue</div>
-      <QueueList articles={[]} />
-    </>
+    <QueuePageLayout
+      error={error}
+      loading={loading}
+      left={<QueueList articles={articles} />}
+      right={null}
+    />
   );
 };
 
