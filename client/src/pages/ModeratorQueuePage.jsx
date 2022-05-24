@@ -1,5 +1,12 @@
+import QueueList from '../features/queue/QueueList';
+
 const ModeratorQueuePage = () => {
-  return <div>Moderator Queue</div>;
+  return (
+    <>
+      <div>Moderator Queue</div>
+      <QueueList articles={[]} />
+    </>
+  );
 };
 
 export default ModeratorQueuePage;
