@@ -18,18 +18,14 @@ class ArticleService {
 
   static async getModeratorQueue() {
     const articles = await Article.find({
-      $where: {
-        reviewStage: ArticleStage.MODERATE,
-      },
+      reviewStage: ArticleStage.MODERATE,
     });
     return articles;
   }
 
   static async getAnalysisQueue() {
     const articles = await Article.find({
-      $where: {
-        reviewStage: ArticleStage.ANALYSE,
-      },
+      reviewStage: ArticleStage.ANALYSE,
     });
     return articles;
   }
