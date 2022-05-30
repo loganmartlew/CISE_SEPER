@@ -20,6 +20,7 @@ const QueueArticle = ({ article, selected }) => {
           {' - '}
           <Typography
             variant='inherit'
+            component='span'
             fontWeight={600}
             sx={{ display: 'inline' }}
           >
