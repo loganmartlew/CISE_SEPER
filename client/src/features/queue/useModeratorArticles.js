@@ -5,8 +5,7 @@ export default () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    setLoading(true);
+  const fetchArticles = () => {
     fetch(`${import.meta.env.VITE_API_URL}/articles/moderation`)
       .then((res) => res.json())
       .then((data) => {
@@ -17,7 +16,17 @@ export default () => {
         setError('An error ocurred while retrieving articles.');
         console.log(err);
       });
+  };
+
+  useEffect(() => {
+    setLoading(true);
+    fetchArticles();
   }, []);
 
-  return { articles, loading, error };
+  const refetch = () => {
+    setLoading(true);
+    fetchArticles();
+  };
+
+  return { articles, loading, error, refetch };
 };
