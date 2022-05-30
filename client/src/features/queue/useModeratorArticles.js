@@ -1,19 +1,12 @@
 import { useState, useEffect } from 'react';
-import useDebounce from '../../hooks/useDebounce';
 
-export default (q) => {
+export default () => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const debouncedSearchTerm = useDebounce(q, 400);
 
-  useEffect(() => {
-    setLoading(true);
-  }, [q]);
-
-  useEffect(() => {
-    setLoading(true);
-    fetch(`${import.meta.env.VITE_API_URL}/articles?q=${debouncedSearchTerm}`)
+  const fetchArticles = () => {
+    fetch(`${import.meta.env.VITE_API_URL}/articles/moderation`)
       .then((res) => res.json())
       .then((data) => {
         setArticles(data);
@@ -21,9 +14,19 @@ export default (q) => {
       })
       .catch((err) => {
         setError('An error ocurred while retrieving articles.');
+        setLoading(false);
         console.log(err);
       });
-  }, [debouncedSearchTerm]);
+  };
 
-  return { articles, loading, error };
+  useEffect(() => {
+    setLoading(true);
+    fetchArticles();
+  }, []);
+
+  const refetch = () => {
+    fetchArticles();
+  };
+
+  return { articles, loading, error, refetch };
 };

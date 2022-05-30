@@ -1,8 +1,54 @@
 const { Article } = require('../models/Article');
+const ArticleStage = require('../../../shared/ArticleStage');
 
 class ArticleService {
   static async getArticles() {
     const articles = await Article.find();
+    return articles;
+  }
+
+  static async getAcceptedArticles() {
+    const articles = await Article.find({
+      $where: {
+        reviewStage: ArticleStage.ACCEPTED,
+      },
+    });
+    return articles;
+  }
+
+  static async getModeratorQueue() {
+    const articles = await Article.find({
+      reviewStage: ArticleStage.MODERATE,
+    });
+    return articles;
+  }
+
+  static async moderateArticle(articleId, data) {
+    const article = await Article.findById(articleId);
+
+    if (!data.notDuplicate) {
+      article.rejectionReason = 'Article is a duplicate';
+    }
+    if (!data.relevant) {
+      article.rejectionReason = 'Article is not relevant';
+    }
+    if (!data.reviewed) {
+      article.rejectionReason = 'Article is not peer reviewed';
+    }
+
+    if (article.rejectionReason) {
+      article.reviewStage = ArticleStage.REJECTED;
+    } else {
+      article.reviewStage = ArticleStage.ANALYSE;
+    }
+
+    article.save();
+  }
+
+  static async getAnalysisQueue() {
+    const articles = await Article.find({
+      reviewStage: ArticleStage.ANALYSE,
+    });
     return articles;
   }
 

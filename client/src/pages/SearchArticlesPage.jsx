@@ -30,7 +30,7 @@ const SearchArticles = () => {
       // eslint-disable-next-line implicit-arrow-linebreak
       articles.map((article) => ({
         title: article.title,
-        sePractice: article.sePractice.name,
+        sePractice: article.sePractice?.name || '',
         authors: article.authors,
         year: article.year,
         doi: article.doi,

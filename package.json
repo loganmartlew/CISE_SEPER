@@ -17,7 +17,8 @@
     "test:client": "vitest run client",
     "test:api": "jest api",
     "test": "npm run test:client && npm run test:api",
-    "start": "node api/index.js"
+    "start": "node api/index.js",
+    "seed": "node api/seedDb.js"
   },
   "author": "",
   "license": "ISC",
@@ -36,7 +37,8 @@
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.31.1",
     "react-router-dom": "^6.3.0",
-    "react-table": "^7.8.0"
+    "react-table": "^7.8.0",
+    "react-toastify": "^9.0.2"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.4",
