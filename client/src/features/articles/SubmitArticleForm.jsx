@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { Stack, styled } from '@mui/material';
 import Button from '../../components/Button';
@@ -6,36 +5,15 @@ import TextInput from '../../components/TextInput';
 
 const Form = styled('form')({});
 
-const SubmitArticleForm = () => {
+const SubmitArticleForm = ({ tool, onSubmit, onReject }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const navigate = useNavigate();
-
-  const submit = (data) => {
-    // eslint-disable-next-line no-param-reassign
-    data.sePractice = {
-      name: 'TDD',
-    };
-
-    fetch(`${import.meta.env.VITE_API_URL}/articles`, {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ articleData: data }),
-    })
-      .then((res) => res.json())
-      .then(() => {
-        navigate('/search');
-      });
-  };
-
   return (
-    <Form autoComplete='off' onSubmit={handleSubmit(submit)}>
+    <Form autoComplete='off' onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing='1.5em'>
         <TextInput
           label='Title'
@@ -78,9 +56,26 @@ const SubmitArticleForm = () => {
           error={errors?.doi}
           helperText={errors?.doi?.message}
         />
-        <Button type='submit' variant='contained' sx={{ width: 'max-content' }}>
-          Submit Article
-        </Button>
+        <Stack direction='row' spacing={2}>
+          <Button
+            type='submit'
+            variant='contained'
+            sx={{ width: 'max-content' }}
+          >
+            {tool ? 'Accept Article' : 'Submit Article'}
+          </Button>
+          {tool && (
+            <Button
+              type='button'
+              variant='contained'
+              color='error'
+              onClick={onReject}
+              sx={{ width: 'max-content' }}
+            >
+              Reject Article
+            </Button>
+          )}
+        </Stack>
       </Stack>
     </Form>
   );

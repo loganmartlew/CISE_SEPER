@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
 import QueuePageLayout from '../features/layout/QueuePageLayout';
 import QueueList from '../features/queue/QueueList';
-import ModeratorTools from '../features/queue/ModeratorTools';
+import AnalystTools from '../features/queue/AnalystTools';
 import useAnalystArticles from '../features/queue/useAnalystArticles';
 import PageTitle from '../components/PageTitle';
 import useAnalyseArticle from '../features/queue/useAnalyseArticle';
@@ -17,7 +17,7 @@ const ModeratorQueuePage = () => {
     console.log(err);
   };
 
-  const { analyse } = useAnalyseArticle({
+  const { analyse, reject } = useAnalyseArticle({
     onSuccess,
     onError,
   });
@@ -49,6 +49,33 @@ const ModeratorQueuePage = () => {
     });
   };
 
+  const onReject = () => {
+    const promise = reject(articles[0]._id, 'Reason');
+    toast.promise(promise, {
+      pending: {
+        render() {
+          return 'Rejecting Article...';
+        },
+        isLoading: true,
+        icon: null,
+      },
+      success: {
+        render() {
+          return 'Article Rejected!';
+        },
+        isLoading: false,
+        icon: null,
+      },
+      error: {
+        render() {
+          return 'Error rejecting article';
+        },
+        isLoading: false,
+        icon: null,
+      },
+    });
+  };
+
   return (
     <>
       <PageTitle sx={{ mb: 2 }}>Analysis Queue</PageTitle>
@@ -56,7 +83,7 @@ const ModeratorQueuePage = () => {
         error={error}
         loading={loading}
         left={<QueueList articles={articles} />}
-        right={<ModeratorTools onSubmit={onSubmit} />}
+        right={<AnalystTools onSubmit={onSubmit} onReject={onReject} />}
       />
     </>
   );
