@@ -27,16 +27,21 @@ class ArticleService {
     const article = await Article.findById(articleId);
 
     if (!data.notDuplicate) {
-      return;
+      article.rejectionReason = 'Article is a duplicate';
     }
     if (!data.relevant) {
-      return;
+      article.rejectionReason = 'Article is not relevant';
     }
     if (!data.reviewed) {
-      return;
+      article.rejectionReason = 'Article is not peer reviewed';
     }
 
-    article.reviewStage = ArticleStage.ANALYSE;
+    if (article.rejectionReason) {
+      article.reviewStage = ArticleStage.REJECTED;
+    } else {
+      article.reviewStage = ArticleStage.ANALYSE;
+    }
+
     article.save();
   }
 
