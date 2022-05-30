@@ -4,13 +4,14 @@ import Button from '../../components/Button';
 import Card from '../../components/Card';
 import Checkbox from '../../components/Checkbox';
 
-const ModeratorTools = () => {
+const ModeratorTools = ({ onSubmit }) => {
   const { control, handleSubmit, reset } = useForm({
     defaultValues: { notDuplicate: false, relevant: false, reviewed: false },
   });
 
   const submit = (data) => {
     console.log(data);
+    onSubmit(data);
     reset();
   };
 

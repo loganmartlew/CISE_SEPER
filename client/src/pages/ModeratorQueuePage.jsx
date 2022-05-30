@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import QueuePageLayout from '../features/layout/QueuePageLayout';
 import QueueList from '../features/queue/QueueList';
 import ModeratorTools from '../features/queue/ModeratorTools';
@@ -12,14 +13,18 @@ const ModeratorQueuePage = () => {
     refetch();
   };
 
-  const onError = (moderateError) => {
-    console.log(moderateError);
-  };
-
-  const { moderate, moderateLoading } = useModerateArticle({
+  const { moderate } = useModerateArticle({
     onSuccess,
-    onError,
   });
+
+  const onSubmit = (data) => {
+    const promise = moderate(articles[0]._id, data);
+    toast.promise(promise, {
+      pending: 'Moderating Article...',
+      success: 'Article Moderated!',
+      error: 'Error Moderating Article',
+    });
+  };
 
   return (
     <>
@@ -28,7 +33,7 @@ const ModeratorQueuePage = () => {
         error={error}
         loading={loading}
         left={<QueueList articles={articles} />}
-        right={<ModeratorTools />}
+        right={<ModeratorTools onSubmit={onSubmit} />}
       />
     </>
   );

@@ -6,7 +6,7 @@ export default ({ onSuccess, onError }) => {
 
   const moderate = (articleId, data) => {
     setLoading(true);
-    fetch(`${import.meta.env.VITE_API_URL}/articles/moderation`, {
+    return fetch(`${import.meta.env.VITE_API_URL}/articles/moderation`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
