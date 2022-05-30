@@ -1,5 +1,11 @@
-export default (onSuccess, onError) => {
+import { useState } from 'react';
+
+export default ({ onSuccess, onError }) => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
   const moderate = (articleId, data) => {
+    setLoading(true);
     fetch(`${import.meta.env.VITE_API_URL}/articles/moderation`, {
       method: 'POST',
       headers: {
@@ -8,12 +14,15 @@ export default (onSuccess, onError) => {
       body: JSON.stringify({ articleId, data }),
     })
       .then(() => {
+        setLoading(false);
         onSuccess();
       })
       .catch(() => {
-        onError();
+        setError('An error ocurred while moderating article.');
+        setLoading(false);
+        onError(error);
       });
   };
 
-  return { moderate };
+  return { moderate, loading };
 };

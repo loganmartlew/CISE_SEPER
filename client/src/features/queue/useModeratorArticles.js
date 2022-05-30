@@ -14,6 +14,7 @@ export default () => {
       })
       .catch((err) => {
         setError('An error ocurred while retrieving articles.');
+        setLoading(false);
         console.log(err);
       });
   };
