@@ -1,4 +1,5 @@
-import { Typography, styled } from '@mui/material';
+/* eslint-disable react/jsx-one-expression-per-line */
+import { Stack, Typography, Link, styled } from '@mui/material';
 import Card from '../../components/Card';
 
 const QueueCard = styled(Card)(({ theme, selected }) => ({
@@ -11,19 +12,24 @@ const QueueArticle = ({ article, selected }) => {
   console.log(article);
   return (
     <QueueCard selected={selected}>
-      <Typography variant='h6'>{article.title}</Typography>
-      <Typography fontWeight={600}>Authors:</Typography>
-      <Typography fontStyle='italic'>
-        {article.authors}
-        {' - '}
-        <Typography
-          variant='inherit'
-          fontWeight={600}
-          sx={{ display: 'inline' }}
-        >
-          {article.year}
+      <Stack spacing={2}>
+        <Typography variant='h6'>{article.title}</Typography>
+        <Typography fontWeight={600}>Authors:</Typography>
+        <Typography fontStyle='italic'>
+          {article.authors}
+          {' - '}
+          <Typography
+            variant='inherit'
+            fontWeight={600}
+            sx={{ display: 'inline' }}
+          >
+            {article.year}
+          </Typography>
         </Typography>
-      </Typography>
+        <Typography>
+          DOI: <Link href={article.doi}>{article.doi}</Link>
+        </Typography>
+      </Stack>
     </QueueCard>
   );
 };
