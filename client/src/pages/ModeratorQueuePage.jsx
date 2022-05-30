@@ -20,9 +20,27 @@ const ModeratorQueuePage = () => {
   const onSubmit = (data) => {
     const promise = moderate(articles[0]._id, data);
     toast.promise(promise, {
-      pending: 'Moderating Article...',
-      success: 'Article Moderated!',
-      error: 'Error Moderating Article',
+      pending: {
+        render() {
+          return 'Moderating...';
+        },
+        isLoading: true,
+        icon: null,
+      },
+      success: {
+        render() {
+          return 'Article Moderated!';
+        },
+        isLoading: false,
+        icon: null,
+      },
+      error: {
+        render() {
+          return 'Error moderating article';
+        },
+        isLoading: false,
+        icon: null,
+      },
     });
   };
 

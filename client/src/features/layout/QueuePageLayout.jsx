@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Grid, Typography } from '@mui/material';
 
 const QueuePageLayout = ({ error, loading, left, right }) => {
@@ -17,4 +18,4 @@ const QueuePageLayout = ({ error, loading, left, right }) => {
   );
 };
 
-export default QueuePageLayout;
+export default memo(QueuePageLayout);

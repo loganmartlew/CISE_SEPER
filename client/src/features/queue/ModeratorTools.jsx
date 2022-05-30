@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { useForm } from 'react-hook-form';
 import { Stack, Typography } from '@mui/material';
 import Button from '../../components/Button';
@@ -50,4 +51,4 @@ const ModeratorTools = ({ onSubmit }) => {
   );
 };
 
-export default ModeratorTools;
+export default memo(ModeratorTools);

@@ -25,7 +25,6 @@ export default () => {
   }, []);
 
   const refetch = () => {
-    setLoading(true);
     fetchArticles();
   };
 
