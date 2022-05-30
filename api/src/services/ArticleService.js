@@ -23,6 +23,23 @@ class ArticleService {
     return articles;
   }
 
+  static async moderateArticle(articleId, data) {
+    const article = await Article.findById(articleId);
+
+    if (!data.notDuplicate) {
+      return;
+    }
+    if (!data.relevant) {
+      return;
+    }
+    if (!data.reviewed) {
+      return;
+    }
+
+    article.reviewStage = ArticleStage.ANALYSE;
+    article.save();
+  }
+
   static async getAnalysisQueue() {
     const articles = await Article.find({
       reviewStage: ArticleStage.ANALYSE,

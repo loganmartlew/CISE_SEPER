@@ -19,6 +19,17 @@ module.exports = () => {
     return res.status(200).json(sortedArticles);
   });
 
+  app.post('/moderation', async (req, res) => {
+    const { articleId, data } = req.body;
+
+    try {
+      await ArticleService.moderateArticle(articleId, data);
+      return res.status(200).json({});
+    } catch (err) {
+      return res.status(500).json({ error: err.message });
+    }
+  });
+
   app.get('/analysis', async (_, res) => {
     const articles = await ArticleService.getAnalysisQueue();
 

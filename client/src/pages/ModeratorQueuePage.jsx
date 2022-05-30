@@ -13,8 +13,13 @@ const ModeratorQueuePage = () => {
     refetch();
   };
 
+  const onError = (err) => {
+    console.log(err);
+  };
+
   const { moderate } = useModerateArticle({
     onSuccess,
+    onError,
   });
 
   const onSubmit = (data) => {

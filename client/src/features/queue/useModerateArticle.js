@@ -8,7 +8,6 @@ const delay = (t, v) => {
 
 export default ({ onSuccess, onError }) => {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
 
   const moderate = (articleId, data) => {
     setLoading(true);
@@ -19,11 +18,13 @@ export default ({ onSuccess, onError }) => {
       },
       body: JSON.stringify({ articleId, data }),
     })
-      .then(() => {
-        return delay(1000);
+      .then((res) => {
+        return delay(1000).then(() => res);
       })
       .then((res) => {
-        if (!res.ok) {
+        const neterror = !`${res.status}`.match(/^(1|2|3)\d\d$/);
+        if (neterror) {
+          onError(res.statusText);
           throw Error(res.statusText);
         }
         return res;
@@ -31,11 +32,6 @@ export default ({ onSuccess, onError }) => {
       .then(() => {
         setLoading(false);
         onSuccess();
-      })
-      .catch(() => {
-        setError('An error ocurred while moderating article.');
-        setLoading(false);
-        onError(error);
       });
   };
 
