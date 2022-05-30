@@ -20,6 +20,15 @@ const articleSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    submitterEmail: {
+      type: String,
+      required: true,
+    },
+    rejectionReason: {
+      type: String,
+      required: false,
+      default: '',
+    },
     sePractice: {
       type: practiceSchema,
     },
