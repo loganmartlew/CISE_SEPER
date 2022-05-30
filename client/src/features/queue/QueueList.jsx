@@ -1,7 +1,15 @@
-import { Stack } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import QueueArticle from './QueueArticle';
 
 const QueueList = ({ articles }) => {
+  if (!articles || articles.length === 0) {
+    return (
+      <Typography variant='h6' component='p'>
+        No articles in the queue.
+      </Typography>
+    );
+  }
+
   return (
     <Stack spacing={2}>
       {articles.map((article, idx) => (
