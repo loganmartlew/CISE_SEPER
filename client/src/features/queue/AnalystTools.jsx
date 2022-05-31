@@ -3,7 +3,7 @@ import { Stack, Typography } from '@mui/material';
 import Card from '../../components/Card';
 import SubmitArticleForm from '../articles/SubmitArticleForm';
 
-const AnalystTools = ({ onSubmit, onReject, article }) => {
+const AnalystTools = ({ onSubmit, onReject, article, practices }) => {
   return (
     <Card>
       <Stack spacing={2}>
@@ -20,6 +20,7 @@ const AnalystTools = ({ onSubmit, onReject, article }) => {
           onSubmit={onSubmit}
           onReject={onReject}
           defaultValues={article}
+          practices={practices}
         />
       </Stack>
     </Card>

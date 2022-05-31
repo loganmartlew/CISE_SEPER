@@ -15,13 +15,19 @@ import TextInput, {
 
 const Form = styled('form')({});
 
-const SubmitArticleForm = ({ tool, onSubmit, onReject, defaultValues }) => {
+const SubmitArticleForm = ({
+  tool,
+  onSubmit,
+  onReject,
+  defaultValues,
+  practices,
+}) => {
   const {
     register,
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm({ defaultValues: { ...defaultValues, practice: 'default' } });
+  } = useForm({ defaultValues: { ...defaultValues, practiceId: 'default' } });
 
   return (
     <Form autoComplete='off' onSubmit={handleSubmit(onSubmit)}>
@@ -70,7 +76,7 @@ const SubmitArticleForm = ({ tool, onSubmit, onReject, defaultValues }) => {
 
         {tool && (
           <Controller
-            name='practice'
+            name='practiceId'
             control={control}
             defaultValue='default'
             rules={{
@@ -81,23 +87,25 @@ const SubmitArticleForm = ({ tool, onSubmit, onReject, defaultValues }) => {
             }}
             render={({ field }) => (
               <FormControl variant='standard'>
-                <StyledLabel htmlFor='practice'>SE Practice</StyledLabel>
+                <StyledLabel htmlFor='practiceId'>SE Practice</StyledLabel>
                 <Select
                   {...field}
                   input={
-                    <StyledInput id='practice' error={!!errors?.practice} />
+                    <StyledInput id='practiceId' error={!!errors?.practiceId} />
                   }
                 >
                   <MenuItem value='default' disabled hidden>
                     Please choose an SE practice
                   </MenuItem>
-                  <MenuItem value='1'>Practice 1</MenuItem>
-                  <MenuItem value='2'>Practice 2</MenuItem>
-                  <MenuItem value='3'>Practice 3</MenuItem>
-                  <MenuItem value='4'>Practice 4</MenuItem>
+                  {practices &&
+                    practices.map((practice) => (
+                      <MenuItem key={practice._id} value={practice._id}>
+                        {practice.name}
+                      </MenuItem>
+                    ))}
                 </Select>
-                <FormHelperText error={!!errors?.practice}>
-                  {errors?.practice?.message}
+                <FormHelperText error={!!errors?.practiceId}>
+                  {errors?.practiceId?.message}
                 </FormHelperText>
               </FormControl>
             )}

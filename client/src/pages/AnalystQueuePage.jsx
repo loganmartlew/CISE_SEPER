@@ -5,9 +5,11 @@ import AnalystTools from '../features/queue/AnalystTools';
 import useAnalystArticles from '../features/queue/useAnalystArticles';
 import PageTitle from '../components/PageTitle';
 import useAnalyseArticle from '../features/queue/useAnalyseArticle';
+import usePractices from '../features/queue/usePractices';
 
 const ModeratorQueuePage = () => {
   const { articles, error, loading, refetch } = useAnalystArticles();
+  const { practices } = usePractices();
 
   const onSuccess = () => {
     refetch();
@@ -88,6 +90,7 @@ const ModeratorQueuePage = () => {
             onSubmit={onSubmit}
             onReject={onReject}
             article={articles[0]}
+            practices={practices}
           />
         }
       />
