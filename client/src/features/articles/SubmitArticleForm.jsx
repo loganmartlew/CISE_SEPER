@@ -1,5 +1,6 @@
 import { useForm, Controller } from 'react-hook-form';
 import {
+  Box,
   Select,
   Stack,
   MenuItem,
@@ -19,6 +20,7 @@ const SubmitArticleForm = ({
   tool,
   onSubmit,
   onReject,
+  onAddPractice,
   defaultValues,
   practices,
 }) => {
@@ -75,41 +77,55 @@ const SubmitArticleForm = ({
         />
 
         {tool && (
-          <Controller
-            name='practiceId'
-            control={control}
-            defaultValue='default'
-            rules={{
-              required: { value: true, message: 'Practice is required' },
-              validate: (value) =>
-                // eslint-disable-next-line implicit-arrow-linebreak
-                value !== 'default' || 'Please select a practice',
-            }}
-            render={({ field }) => (
-              <FormControl variant='standard'>
-                <StyledLabel htmlFor='practiceId'>SE Practice</StyledLabel>
-                <Select
-                  {...field}
-                  input={
-                    <StyledInput id='practiceId' error={!!errors?.practiceId} />
-                  }
-                >
-                  <MenuItem value='default' disabled hidden>
-                    Please choose an SE practice
-                  </MenuItem>
-                  {practices &&
-                    practices.map((practice) => (
-                      <MenuItem key={practice._id} value={practice._id}>
-                        {practice.name}
+          <Stack direction='row' spacing={2} alignItems='end'>
+            <Box sx={{ flexGrow: 1 }}>
+              <Controller
+                name='practiceId'
+                control={control}
+                defaultValue='default'
+                rules={{
+                  required: { value: true, message: 'Practice is required' },
+                  validate: (value) =>
+                    // eslint-disable-next-line implicit-arrow-linebreak
+                    value !== 'default' || 'Please select a practice',
+                }}
+                render={({ field }) => (
+                  <FormControl variant='standard' sx={{ width: '100%' }}>
+                    <StyledLabel htmlFor='practiceId'>SE Practice</StyledLabel>
+                    <Select
+                      {...field}
+                      input={
+                        <StyledInput
+                          id='practiceId'
+                          error={!!errors?.practiceId}
+                        />
+                      }
+                    >
+                      <MenuItem value='default' disabled hidden>
+                        Please choose an SE practice
                       </MenuItem>
-                    ))}
-                </Select>
-                <FormHelperText error={!!errors?.practiceId}>
-                  {errors?.practiceId?.message}
-                </FormHelperText>
-              </FormControl>
-            )}
-          />
+                      {practices &&
+                        practices.map((practice) => (
+                          <MenuItem key={practice._id} value={practice._id}>
+                            {practice.name}
+                          </MenuItem>
+                        ))}
+                    </Select>
+                    <FormHelperText error={!!errors?.practiceId}>
+                      {errors?.practiceId?.message}
+                    </FormHelperText>
+                  </FormControl>
+                )}
+              />
+            </Box>
+            <Button
+              variant='outlined'
+              onClick={onAddPractice}
+              sx={{ display: 'block', mb: '5px !important' }}
+            >
+              Add Practice
+            </Button>
+          </Stack>
         )}
 
         <Stack direction='row' spacing={2}>
