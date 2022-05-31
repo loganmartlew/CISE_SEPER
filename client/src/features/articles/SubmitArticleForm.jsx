@@ -5,12 +5,12 @@ import TextInput from '../../components/TextInput';
 
 const Form = styled('form')({});
 
-const SubmitArticleForm = ({ tool, onSubmit, onReject }) => {
+const SubmitArticleForm = ({ tool, onSubmit, onReject, defaultValues }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({ defaultValues });
 
   return (
     <Form autoComplete='off' onSubmit={handleSubmit(onSubmit)}>

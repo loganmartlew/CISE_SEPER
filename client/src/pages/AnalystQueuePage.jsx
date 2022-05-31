@@ -83,7 +83,13 @@ const ModeratorQueuePage = () => {
         error={error}
         loading={loading}
         left={<QueueList articles={articles} />}
-        right={<AnalystTools onSubmit={onSubmit} onReject={onReject} />}
+        right={
+          <AnalystTools
+            onSubmit={onSubmit}
+            onReject={onReject}
+            article={articles[0]}
+          />
+        }
       />
     </>
   );
