@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { toast } from 'react-toastify';
 import QueuePageLayout from '../features/layout/QueuePageLayout';
 import QueueList from '../features/queue/QueueList';
@@ -6,8 +7,11 @@ import useAnalystArticles from '../features/queue/useAnalystArticles';
 import PageTitle from '../components/PageTitle';
 import useAnalyseArticle from '../features/queue/useAnalyseArticle';
 import usePractices from '../features/queue/usePractices';
+import NewPracticeDialog from '../features/queue/NewPracticeDialog';
 
 const ModeratorQueuePage = () => {
+  const [practiceModalOpen, setPracticeModalOpen] = useState(false);
+
   const { articles, error, loading, refetch } = useAnalystArticles();
   const { practices } = usePractices();
 
@@ -89,10 +93,16 @@ const ModeratorQueuePage = () => {
           <AnalystTools
             onSubmit={onSubmit}
             onReject={onReject}
+            onAddPractice={() => setPracticeModalOpen(true)}
             article={articles[0]}
             practices={practices}
           />
         }
+      />
+      <NewPracticeDialog
+        open={practiceModalOpen}
+        onClose={() => setPracticeModalOpen(false)}
+        onSubmit={console.log}
       />
     </>
   );
