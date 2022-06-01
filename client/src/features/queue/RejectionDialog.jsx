@@ -8,7 +8,7 @@ import {
 import Button from '../../components/Button';
 import TextInput from '../../components/TextInput';
 
-const NewPracticeDialog = ({ open, onClose, onSubmit }) => {
+const RejectionDialog = ({ open, onClose, onSubmit }) => {
   const {
     register,
     handleSubmit,
@@ -17,24 +17,24 @@ const NewPracticeDialog = ({ open, onClose, onSubmit }) => {
   } = useForm();
 
   const submit = (data) => {
-    onSubmit(data);
+    onSubmit(data.reason);
     onClose();
     reset();
   };
 
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogTitle>New SE Practice</DialogTitle>
+      <DialogTitle>Reject Article</DialogTitle>
       <form onSubmit={handleSubmit(submit)}>
         <DialogContent sx={{ pt: 0 }}>
           <TextInput
-            label='Name'
-            placeholder='Practice Name'
+            label='Reason'
+            placeholder='Reason for rejection'
             required
-            error={errors?.name}
-            helperText={errors?.name?.message}
-            {...register('name', {
-              required: { value: true, message: 'Name is required' },
+            error={errors?.reason}
+            helperText={errors?.reason?.message}
+            {...register('reason', {
+              required: { value: true, message: 'Reason is required' },
             })}
           />
         </DialogContent>
@@ -51,4 +51,4 @@ const NewPracticeDialog = ({ open, onClose, onSubmit }) => {
   );
 };
 
-export default NewPracticeDialog;
+export default RejectionDialog;

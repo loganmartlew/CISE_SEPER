@@ -8,9 +8,11 @@ import PageTitle from '../components/PageTitle';
 import useAnalyseArticle from '../features/queue/useAnalyseArticle';
 import usePractices from '../features/queue/usePractices';
 import NewPracticeDialog from '../features/queue/NewPracticeDialog';
+import RejectionDialog from '../features/queue/RejectionDialog';
 
 const AnalystQueuePage = () => {
   const [practiceModalOpen, setPracticeModalOpen] = useState(false);
+  const [reasonModalOpen, setReasonModalOpen] = useState(false);
 
   const { articles, error, loading, refetch } = useAnalystArticles();
   const { practices, addPractice } = usePractices();
@@ -23,7 +25,7 @@ const AnalystQueuePage = () => {
     console.log(err);
   };
 
-  const { analyse, reject } = useAnalyseArticle({
+  const { analyse } = useAnalyseArticle({
     onSuccess,
     onError,
   });
@@ -56,30 +58,7 @@ const AnalystQueuePage = () => {
   };
 
   const onReject = () => {
-    const promise = reject(articles[0]._id, 'Reason');
-    toast.promise(promise, {
-      pending: {
-        render() {
-          return 'Rejecting Article...';
-        },
-        isLoading: true,
-        icon: null,
-      },
-      success: {
-        render() {
-          return 'Article Rejected!';
-        },
-        isLoading: false,
-        icon: null,
-      },
-      error: {
-        render() {
-          return 'Error rejecting article';
-        },
-        isLoading: false,
-        icon: null,
-      },
-    });
+    setReasonModalOpen(true);
   };
 
   const onAddPractice = (data) => {
@@ -109,6 +88,38 @@ const AnalystQueuePage = () => {
     });
   };
 
+  const onSubmitReason = (reason) => {
+    if (reason === '') {
+      toast.error('You must provide a reason for rejecting the article');
+      return;
+    }
+
+    const promise = analyse(articles[0]._id, reason);
+    toast.promise(promise, {
+      pending: {
+        render() {
+          return 'Rejecting Article...';
+        },
+        isLoading: true,
+        icon: null,
+      },
+      success: {
+        render() {
+          return 'Article Rejected!';
+        },
+        isLoading: false,
+        icon: null,
+      },
+      error: {
+        render() {
+          return 'Error rejecting article';
+        },
+        isLoading: false,
+        icon: null,
+      },
+    });
+  };
+
   return (
     <>
       <PageTitle sx={{ mb: 2 }}>Analysis Queue</PageTitle>
@@ -130,6 +141,11 @@ const AnalystQueuePage = () => {
         open={practiceModalOpen}
         onClose={() => setPracticeModalOpen(false)}
         onSubmit={onAddPractice}
+      />
+      <RejectionDialog
+        open={reasonModalOpen}
+        onClose={() => setReasonModalOpen(false)}
+        onSubmit={onSubmitReason}
       />
     </>
   );

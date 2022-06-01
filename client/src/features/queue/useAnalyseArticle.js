@@ -30,7 +30,5 @@ export default ({ onSuccess, onError }) => {
       });
   };
 
-  const reject = (articleId, reason) => {};
-
-  return { analyse, reject, loading };
+  return { analyse, loading };
 };

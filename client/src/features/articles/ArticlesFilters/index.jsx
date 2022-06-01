@@ -13,7 +13,7 @@ import {
   Checkbox,
 } from '@mui/material';
 import { ExpandMore } from '@mui/icons-material';
-import usePractices from './usePractices';
+import usePractices from '../../queue/usePractices';
 import { toggleColumn, setPractice } from './filtersReducer';
 
 const ArticlesFilters = ({ columns, filters, dispatchFilters }) => {
