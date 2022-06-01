@@ -39,7 +39,9 @@ const NewPracticeDialog = ({ open, onClose, onSubmit }) => {
           />
         </DialogContent>
         <DialogActions sx={{ p: '1.5em', pt: 0 }}>
-          <Button variant='contained'>Submit Practice</Button>
+          <Button type='submit' variant='contained'>
+            Submit Practice
+          </Button>
         </DialogActions>
       </form>
     </Dialog>

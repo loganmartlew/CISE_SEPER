@@ -13,7 +13,7 @@ const ModeratorQueuePage = () => {
   const [practiceModalOpen, setPracticeModalOpen] = useState(false);
 
   const { articles, error, loading, refetch } = useAnalystArticles();
-  const { practices } = usePractices();
+  const { practices, addPractice } = usePractices();
 
   const onSuccess = () => {
     refetch();
@@ -82,6 +82,33 @@ const ModeratorQueuePage = () => {
     });
   };
 
+  const onAddPractice = (data) => {
+    const promise = addPractice(data.name);
+    toast.promise(promise, {
+      pending: {
+        render() {
+          return 'Adding Practice...';
+        },
+        isLoading: true,
+        icon: null,
+      },
+      success: {
+        render() {
+          return 'Practice Added!';
+        },
+        isLoading: false,
+        icon: null,
+      },
+      error: {
+        render() {
+          return 'Error adding practice';
+        },
+        isLoading: false,
+        icon: null,
+      },
+    });
+  };
+
   return (
     <>
       <PageTitle sx={{ mb: 2 }}>Analysis Queue</PageTitle>
@@ -102,7 +129,7 @@ const ModeratorQueuePage = () => {
       <NewPracticeDialog
         open={practiceModalOpen}
         onClose={() => setPracticeModalOpen(false)}
-        onSubmit={console.log}
+        onSubmit={onAddPractice}
       />
     </>
   );

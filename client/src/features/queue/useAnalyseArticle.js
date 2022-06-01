@@ -1,10 +1,5 @@
 import { useState } from 'react';
-
-const delay = (t, v) => {
-  return new Promise((resolve) => {
-    setTimeout(() => resolve(v), t);
-  });
-};
+import delay from '../../util/delay';
 
 export default ({ onSuccess, onError }) => {
   const [loading, setLoading] = useState(false);
