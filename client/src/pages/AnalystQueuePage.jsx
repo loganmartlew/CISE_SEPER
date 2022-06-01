@@ -9,7 +9,7 @@ import useAnalyseArticle from '../features/queue/useAnalyseArticle';
 import usePractices from '../features/queue/usePractices';
 import NewPracticeDialog from '../features/queue/NewPracticeDialog';
 
-const ModeratorQueuePage = () => {
+const AnalystQueuePage = () => {
   const [practiceModalOpen, setPracticeModalOpen] = useState(false);
 
   const { articles, error, loading, refetch } = useAnalystArticles();
@@ -135,4 +135,4 @@ const ModeratorQueuePage = () => {
   );
 };
 
-export default ModeratorQueuePage;
+export default AnalystQueuePage;

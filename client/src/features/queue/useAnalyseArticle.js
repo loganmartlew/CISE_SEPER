@@ -5,8 +5,6 @@ export default ({ onSuccess, onError }) => {
   const [loading, setLoading] = useState(false);
 
   const analyse = (articleId, data) => {
-    console.log(data);
-    return;
     setLoading(true);
     return fetch(`${import.meta.env.VITE_API_URL}/articles/analysis`, {
       method: 'POST',

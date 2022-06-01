@@ -1,5 +1,6 @@
 const { Article } = require('../models/Article');
 const ArticleStage = require('../../../shared/ArticleStage');
+const PracticeService = require('./PracticeService');
 
 class ArticleService {
   static async getArticles() {
@@ -61,6 +62,28 @@ class ArticleService {
     } catch (error) {
       return null;
     }
+  }
+
+  static async analyseArticle(articleId, data) {
+    const article = await Article.findById(articleId);
+
+    if (typeof data === 'string') {
+      article.rejectionReason = data;
+      article.reviewStage = ArticleStage.REJECTED;
+      article.save();
+      return;
+    }
+
+    const practice = await PracticeService.getPractice(data.practiceId);
+
+    article.title = data.title;
+    article.authors = data.authors;
+    article.year = data.year;
+    article.doi = data.doi;
+    article.sePractice = practice;
+
+    article.reviewStage = ArticleStage.ACCEPTED;
+    article.save();
   }
 
   // static async searchArticles(q) {}

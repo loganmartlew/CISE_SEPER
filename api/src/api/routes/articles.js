@@ -34,10 +34,21 @@ module.exports = () => {
     const articles = await ArticleService.getAnalysisQueue();
 
     const sortedArticles = articles.sort((a, b) => {
-      return new Date(b.updatedAt) - new Date(a.updatedAt);
+      return new Date(a.updatedAt) - new Date(b.updatedAt);
     });
 
     return res.status(200).json(sortedArticles);
+  });
+
+  app.post('/analysis', async (req, res) => {
+    const { articleId, data } = req.body;
+
+    try {
+      await ArticleService.analyseArticle(articleId, data);
+      return res.status(200).json({});
+    } catch (err) {
+      return res.status(500).json({ error: err.message });
+    }
   });
 
   app.post('/', async (req, res) => {
