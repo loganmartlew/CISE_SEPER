@@ -100,6 +100,7 @@ class ArticleService {
       newArticle.year = year;
       newArticle.doi = doi;
       newArticle.sePractice = sePractice;
+      newArticle.submitterEmail = '';
       newArticle.save();
 
       return newArticle;
