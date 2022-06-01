@@ -60,6 +60,10 @@ const SubmitArticleForm = ({
           placeholder='Article Publication Year'
           {...register('year', {
             required: { value: true, message: 'Year is required' },
+            pattern: {
+              value: /^(0|[1-9]\d*)(\.\d+)?$/,
+              message: 'Year must be a number',
+            },
           })}
           required
           error={errors?.year}
