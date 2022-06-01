@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import { FormControl, InputBase, FormHelperText, styled } from '@mui/material';
 
-const StyledInput = styled(InputBase)(({ theme, error }) => ({
+export const StyledInput = styled(InputBase)(({ theme, error }) => ({
   padding: '0.3em 1em',
   border: `thin solid ${
     error ? theme.palette.error.main : theme.palette.mono.dark
@@ -10,9 +10,12 @@ const StyledInput = styled(InputBase)(({ theme, error }) => ({
   borderRadius: '10px',
   fontSize: '1rem',
   color: error ? theme.palette.error.main : 'inherit',
+  '&:focus': {
+    borderColor: error ? theme.palette.error.main : theme.palette.primary.main,
+  },
 }));
 
-const StyledLabel = styled('label')(({ theme, error }) => ({
+export const StyledLabel = styled('label')(({ theme, error }) => ({
   color: error ? theme.palette.error.main : 'inherit',
 }));
 

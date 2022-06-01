@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Box, Stack, Container, styled } from '@mui/material';
+import { Box, Stack, Container, Menu, MenuItem, styled } from '@mui/material';
 import Button from '../../components/Button';
 import Logo from '../../components/Logo';
 
@@ -9,6 +10,17 @@ const StyledHeader = styled('header')(({ theme }) => ({
 }));
 
 const Header = () => {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <StyledHeader>
       <Container>
@@ -34,9 +46,22 @@ const Header = () => {
             </Stack>
           </Box>
           <Box>
-            <Link to='/login'>
-              <Button variant='outlined'>Login</Button>
-            </Link>
+            <Stack direction='row' spacing={2} alignItems='center'>
+              <Button variant='navlink' onClick={handleClick}>
+                Article Queues
+              </Button>
+              <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
+                <MenuItem onClick={handleClose}>
+                  <Link to='/moderationqueue'>Moderation Queue</Link>
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <Link to='/analysisqueue'>Analysis Queue</Link>
+                </MenuItem>
+              </Menu>
+              <Link to='/login'>
+                <Button variant='outlined'>Login</Button>
+              </Link>
+            </Stack>
           </Box>
         </Stack>
       </Container>

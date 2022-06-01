@@ -4,9 +4,9 @@ import delay from '../../util/delay';
 export default ({ onSuccess, onError }) => {
   const [loading, setLoading] = useState(false);
 
-  const moderate = (articleId, data) => {
+  const analyse = (articleId, data) => {
     setLoading(true);
-    return fetch(`${import.meta.env.VITE_API_URL}/articles/moderation`, {
+    return fetch(`${import.meta.env.VITE_API_URL}/articles/analysis`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -30,5 +30,5 @@ export default ({ onSuccess, onError }) => {
       });
   };
 
-  return { moderate, loading };
+  return { analyse, loading };
 };

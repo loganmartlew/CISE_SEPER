@@ -9,5 +9,11 @@ module.exports = () => {
     return res.status(200).json(practices);
   });
 
+  app.post('/', async (req, res) => {
+    const { name } = req.body;
+    const practice = await PracticeService.addPractice(name);
+    return res.status(201).json(practice);
+  });
+
   return app;
 };

@@ -3,6 +3,7 @@ import AppShell from '../features/layout/AppShell';
 import SubmitArticlePage from '../pages/SubmitArticlePage';
 import SearchArticlesPage from '../pages/SearchArticlesPage';
 import ModeratorQueuePage from '../pages/ModeratorQueuePage';
+import AnalystQueuePage from '../pages/AnalystQueuePage';
 
 const AppRoutes = () => {
   return (
@@ -13,7 +14,7 @@ const AppRoutes = () => {
           <Route path='/search' element={<SearchArticlesPage />} />
           <Route path='/submit' element={<SubmitArticlePage />} />
           <Route path='/moderationqueue' element={<ModeratorQueuePage />} />
-          <Route path='/analysisqueue' element={<h1>Analysis Queue</h1>} />
+          <Route path='/analysisqueue' element={<AnalystQueuePage />} />
         </Route>
       </Routes>
     </Router>
